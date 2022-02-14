@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>UFO Sightings Form</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Form for UFO Sightings</h1>
+    <form action="/sighting" method="post">
+      <label for="itext">Statement:</label><br />
+      <textarea type="text" id="itext" name="text"></textarea><br />
+      <label for="date_time">Date / Time:</label><br />
+      <input
+        type="text"
+        id="date_time"
+        name="date_time"
+        placeholder="10/2/19 22:00"
+      /><br />
+      <label for="city">City:</label><br />
+      <input text type="text" id="city" name="city" /><br />
+      <label for="state">State:</label><br />
+      <input type="text" id="state" name="state" /><br />
+      <label for="shape">Shape of UFO:</label><br />
+      <input type="text" id="shape" name="shape" /><br />
+      <label for="duration">Duration:</label><br />
+      <input type="text" id="duration" name="duration" /><br />
+      <label for="summary">Summary:</label><br />
+      <input type="text" id="summary" name="summary" /><br /><br />
+      <input type="submit" value="Submit" />
+      <input type="reset" value="Reset" /><br />
+    </form>
+  </body>
+</html>

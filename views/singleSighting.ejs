@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Sighting</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a href="/sighting/<%= sightingsObj.index %>/edit ">Click here to edit</a>
+    <h3>Statement:</h3>
+    <p><%= sightingsObj.sightings.text %></p>
+    <h3>Date / Time:</h3>
+    <p><%= sightingsObj.sightings.date_time%></p>
+    <h3>City:</h3>
+    <p><%= sightingsObj.sightings.city %></p>
+    <h3>State:</h3>
+    <p><%= sightingsObj.sightings.state %></p>
+    <h3>Duration:</h3>
+    <p><%= sightingsObj.sightings.duration %></p>
+    <h3>Summary:</h3>
+    <p><%= sightingsObj.sightings.summary %></p>
+  </body>
+</html>
