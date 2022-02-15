@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <p>Click "Delete" below to delete sighting <%= index %>.</p>
+    <form action="/sighting/<%= index %>?_method=DELETE" method="POST">
+      <input type="submit" value="Delete" />
+    </form>
+  </body>
+</html>

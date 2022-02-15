@@ -1,7 +1,7 @@
 /* eslint-disable comma-dangle */
 import express, { urlencoded } from 'express';
 import methodOverride from 'method-override';
-import { read, add, edit } from './jsonFileStorage.js';
+import { read, add, edit, write } from './jsonFileStorage.js';
 
 const app = express();
 
@@ -41,14 +41,16 @@ app.get('/sighting/:index', (req, res) => {
   });
 });
 
-// render form to edit a single sighting DOING
+// render form to edit a single sighting
 app.get('/sighting/:index/edit', (req, res) => {
   const { index } = req.params;
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error: ', err);
     }
+    // get the sighting data from content
     const sighting = content.sightings[index];
+    // add index value to sighting
     sighting.index = index;
     // add index obj for ejs template to reference
     res.render('singleEdit', { sighting });
@@ -75,6 +77,7 @@ app.put('/sighting/:index', (req, res) => {
       if (err) {
         console.log('Write error: ', err);
       }
+      // after writing, send status 200 and redirect back to index
       res.status(200).redirect('/');
     }
   );
@@ -89,6 +92,22 @@ app.get('/', (req, res) => {
     const { sightings } = content;
 
     res.render('index', { sightings });
+  });
+});
+
+app.get('/sighting/:index/delete', (req, res) => {
+  const { index } = req.params;
+  res.render('singleDelete', { index });
+});
+// delete a sighting
+app.delete('/sighting/:index', (req, res) => {
+  const { index } = req.params;
+  read('data.json', (err, content) => {
+    content.sightings.splice(index, 1);
+    write('data.json', content, (err) => {
+      // after writing, send 'sighting deleted'
+      res.send('Sighting Deleted');
+    });
   });
 });
 
