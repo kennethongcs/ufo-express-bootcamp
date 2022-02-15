@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>List of Shapes:</h1>
+    <% for( let i = 0; i < listOfShapes.length; i++ ) { %>
+    <a href="/shapes/<%= listOfShapes[i] %>"
+      ><p><%= i +1%>: <%= listOfShapes[i] %></p></a
+    >
+
+    <% } %>
+  </body>
+</html>

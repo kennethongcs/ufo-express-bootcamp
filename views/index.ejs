@@ -6,9 +6,12 @@
   <body>
     <h1>List of Sightings:</h1>
     <% for( let i = 0; i < sightings.length; i++ ) { %>
-    <a href="/sighting/<%= i %>"
-      ><%= i + 1 %>: <%= sightings[i].summary %> <br /> </a
-    ><br />
+    <a href="/sighting/<%= i %>">Sighting <%= i + 1 %>:</a> <br /><%=
+    sightings[i].date_time %> <br />
+
+    <%= sightings[i].city %> <br />
+    <%= sightings[i].state %>
+    <hr />
     <% } %>
   </body>
 </html>

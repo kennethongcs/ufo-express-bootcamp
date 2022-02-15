@@ -111,4 +111,34 @@ app.delete('/sighting/:index', (req, res) => {
   });
 });
 
+// render list of shapes
+app.get('/shapes', (req, res) => {
+  read('data.json', (err, content) => {
+    if (err) {
+      console.log('Read error: ', err);
+    }
+    const listOfShapes = [];
+    content.sightings.forEach((sighting) => {
+      listOfShapes.push(sighting.shape);
+    });
+    res.render('shapes', { listOfShapes });
+  });
+});
+
+// render list of specified shapes
+app.get('/shapes/:shape', (req, res) => {
+  const { shape } = req.params;
+  read('data.json', (err, content) => {
+    if (err) {
+      console.log('Read error: ', err);
+    }
+    const filteredList = content.sightings.filter((sighting) => {
+      if (sighting.shape === shape) {
+        return sighting.shape;
+      }
+    });
+    res.render('singleShape', { filteredList });
+  });
+});
+
 app.listen(3004);

@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>List of Shapes:</h1>
+
+    <% for( let i = 0; i < filteredList.length; i++ ) { %>
+    <p><%= filteredList[i].date_time %></p>
+    <p><%= filteredList[i].city %></p>
+    <p><%= filteredList[i].state %></p>
+    <hr />
+    <% } %>
+  </body>
+</html>
