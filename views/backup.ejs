@@ -1,0 +1,8 @@
+<% for( let i = 0; i < sightings.length; i++ ) { %>
+<div class="row mx-4">
+  <a href="/sighting/<%= i %>">Sighting <%= i + 1 %>:</a>
+  <%=sightings[i].date_time %> <br />
+  <%= sightings[i].shape %> <br />
+  <%= sightings[i].city %> <br />
+</div>
+<% } %>

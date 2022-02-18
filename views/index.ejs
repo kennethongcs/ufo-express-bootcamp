@@ -1,17 +1,56 @@
 <html>
   <head>
-    <title>List of Sightings</title>
+    <title>UFO Sightings</title>
+    <%- include ('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>List of Sightings:</h1>
-    <% for( let i = 0; i < sightings.length; i++ ) { %>
-    <a href="/sighting/<%= i %>">Sighting <%= i + 1 %>:</a> <br /><%=
-    sightings[i].date_time %> <br />
-
-    <%= sightings[i].city %> <br />
-    <%= sightings[i].state %>
-    <hr />
-    <% } %>
+    <%- include('partials/nav') %>
+    <div class="container-fluid">
+      <header class="jumbotron jumbotron-fluid jumbotron-color">
+        <div class="mx-4">
+          <h1>UFO Sightings</h1>
+          <p>Where all your fantastical sightings are found</p>
+        </div>
+      </header>
+      <main>
+        <h2 class="font-weight-light text-center">Sighting List</h2>
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Sighting</th>
+              <th>Date / Time</th>
+              <th>Shape</th>
+              <th>City</th>
+              <th>Functions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for( let i = 0; i < sightings.length; i++ ) { %>
+            <tr>
+              <td>
+                <a href="/sighting/<%= i %>">Sighting <%= i + 1 %></a>
+              </td>
+              <td><%=sightings[i].date_time %></td>
+              <td><%= sightings[i].shape %></td>
+              <td><%= sightings[i].city %></td>
+              <td>
+                <form
+                  class="button-tile"
+                  action="/sighting/<%= i %>?_method=DELETE"
+                  method="POST"
+                >
+                  <input type="submit" value="Delete" />
+                </form>
+                <form class="button-tile" action="/sighting/<%= i %>/edit">
+                  <input type="submit" value="Edit" />
+                </form>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </main>
+    </div>
   </body>
 </html>

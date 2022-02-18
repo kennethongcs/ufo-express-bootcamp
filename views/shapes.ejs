@@ -1,14 +1,23 @@
 <html>
   <head>
+    <!-- page to view a list of shapes in DB -->
+    <%- include('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>List of Shapes:</h1>
-    <% for( let i = 0; i < listOfShapes.length; i++ ) { %>
-    <a href="/shapes/<%= listOfShapes[i] %>"
-      ><p><%= i +1%>: <%= listOfShapes[i] %></p></a
-    >
-
-    <% } %>
+    <%- include('partials/nav') %>
+    <div class="container-fluid">
+      <%- include('partials/header', {title: `List of Shapes Recorded`}) %>
+      <!-- loop to get list of shapes -->
+      <div class="list-group">
+        <% for( let i = 0; i < noDupesList.length; i++ ) { %>
+        <a
+          href="/shapes/<%= noDupesList[i] %>"
+          class="list-group-item list-group-item-action bg-dark text-light"
+          ><p><%= i +1%>: <%= noDupesList[i] %></p></a
+        >
+        <% } %>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,15 +1,41 @@
 <html>
   <head>
+    <!-- page to view all occurances of a selected shape -->
+    <%- include('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>List of Shapes:</h1>
-
-    <% for( let i = 0; i < filteredList.length; i++ ) { %>
-    <p><%= filteredList[i].date_time %></p>
-    <p><%= filteredList[i].city %></p>
-    <p><%= filteredList[i].state %></p>
-    <hr />
-    <% } %>
+    <%- include('partials/nav') %>
+    <div class="container-fluid">
+      <%- include('partials/header', {title: `List of ${filteredList.shape}
+      shapes`}) %>
+      <!-- loop over the list of shapes -->
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Sighting</th>
+            <th>Date / Time</th>
+            <th>City</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for( let i = 0; i < filteredList.length; i++ ) { %>
+          <tr>
+            <td>
+              <a href="/sighting/<%=filteredList[i].index%>"
+                >Sighting <%= i + 1%>
+              </a>
+            </td>
+            <td>
+              <p><%= filteredList[i].date_time %></p>
+            </td>
+            <td>
+              <p><%= filteredList[i].city %></p>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

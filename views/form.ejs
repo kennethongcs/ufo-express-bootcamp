@@ -1,32 +1,91 @@
 <html>
   <head>
+    <!-- form to add UFO sightings -->
     <title>UFO Sightings Form</title>
+    <%- include('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Form for UFO Sightings</h1>
-    <form action="/sighting" method="post">
-      <label for="itext">Statement:</label><br />
-      <textarea type="text" id="itext" name="text"></textarea><br />
-      <label for="date_time">Date / Time:</label><br />
-      <input
-        type="text"
-        id="date_time"
-        name="date_time"
-        placeholder="10/2/19 22:00"
-      /><br />
-      <label for="city">City:</label><br />
-      <input text type="text" id="city" name="city" /><br />
-      <label for="state">State:</label><br />
-      <input type="text" id="state" name="state" /><br />
-      <label for="shape">Shape of UFO:</label><br />
-      <input type="text" id="shape" name="shape" /><br />
-      <label for="duration">Duration:</label><br />
-      <input type="text" id="duration" name="duration" /><br />
-      <label for="summary">Summary:</label><br />
-      <input type="text" id="summary" name="summary" /><br /><br />
-      <input type="submit" value="Submit" />
-      <input type="reset" value="Reset" /><br />
-    </form>
+    <%- include('partials/nav') %>
+    <div class="container-fluid">
+      <!-- <h1 class="display-4 mt-4">Form for UFO Sightings</h1> -->
+      <%- include('partials/header', {title: 'Form for UFO Sightings'}) %>
+      <form action="/sighting" method="post" class="was-validated">
+        <div class="form-group">
+          <label for="itext">Statement:</label>
+          <input
+            type="text"
+            id="itext"
+            name="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="date_time">Date / Time:</label>
+          <input
+            type="text"
+            id="date_time"
+            name="date_time"
+            placeholder="10/2/19 22:00"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City:</label>
+          <input
+            text
+            type="text"
+            id="city"
+            name="city"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="state">State:</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shape">Shape of UFO:</label>
+          <input
+            type="text"
+            id="shape"
+            name="shape"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="duration">Duration:</label>
+          <input
+            type="text"
+            id="duration"
+            name="duration"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="summary">Summary:</label>
+          <input
+            type="text"
+            id="summary"
+            name="summary"
+            class="form-control"
+            required
+          /><br />
+        </div>
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" /><br />
+      </form>
+    </div>
   </body>
 </html>

@@ -1,68 +1,102 @@
 <html>
   <head>
+    <!-- page to edit single sighting -->
     <title>UFO Sightings Edit Form</title>
+    <%- include('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Form to Edit UFO Sightings</h1>
-    <form action="/sighting/<%=sighting.index%>?_method=PUT" method="POST">
-      <!-- <input name="_method" type="hidden" value="PUT" /> -->
-      <label for="itext">Statement:</label><br />
-      <input
-        type="text"
-        id="itext"
-        name="text"
-        value="<%= sighting.text %>"
-        size="50"
-      />
-      <br />
-      <label for="date_time">Date / Time:</label><br />
-      <input
-        type="text"
-        id="date_time"
-        name="date_time"
-        placeholder="10/2/19 22:00"
-        d
-        value="<%= sighting.date_time %> "
-      /><br />
-      <label for="city">City:</label><br />
-      <input
-        text
-        type="text"
-        id="city"
-        name="city"
-        value="<%= sighting.city %>"
-      /><br />
-      <label for="state">State:</label><br />
-      <input
-        type="text"
-        id="state"
-        name="state"
-        value="<%= sighting.state %>"
-      /><br />
-      <label for="shape">Shape of UFO:</label><br />
-      <input
-        type="text"
-        id="shape"
-        name="shape"
-        value="<%= sighting.shape %>"
-      /><br />
-      <label for="duration">Duration:</label><br />
-      <input
-        type="text"
-        id="duration"
-        name="duration"
-        value="<%= sighting.duration %>"
-      /><br />
-      <label for="summary">Summary:</label><br />
-      <input
-        type="text"
-        id="summary"
-        name="summary"
-        value="<%= sighting.summary %>"
-      /><br /><br />
-      <input type="submit" value="Submit" />
-      <input type="reset" value="Reset" /><br />
-    </form>
+    <%- include('partials/nav') %>
+    <div class="container-fluid">
+      <%- include('partials/header', {title: 'Form to edit UFO Sightings'}) %>
+      <form
+        action="/sighting/<%=sighting.index%>?_method=PUT"
+        method="POST"
+        class="was-validated"
+      >
+        <div class="form-group">
+          <label for="itext">Statement:</label><br />
+          <input
+            type="text"
+            id="itext"
+            name="text"
+            value="<%= sighting.text %>"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="date_time">Date / Time:</label><br />
+          <input
+            type="text"
+            id="date_time"
+            name="date_time"
+            placeholder="10/2/19 22:00"
+            d
+            value="<%= sighting.date_time %> "
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City:</label><br />
+          <input
+            text
+            type="text"
+            id="city"
+            name="city"
+            value="<%= sighting.city %>"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="state">State:</label><br />
+          <input
+            type="text"
+            id="state"
+            name="state"
+            value="<%= sighting.state %>"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shape">Shape of UFO:</label><br />
+          <input
+            type="text"
+            id="shape"
+            name="shape"
+            value="<%= sighting.shape %>"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="duration">Duration:</label><br />
+          <input
+            type="text"
+            id="duration"
+            name="duration"
+            value="<%= sighting.duration %>"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="summary">Summary:</label><br />
+          <input
+            type="text"
+            id="summary"
+            name="summary"
+            value="<%= sighting.summary %>"
+            class="form-control"
+            required
+          />
+        </div>
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" /><br />
+      </form>
+    </div>
   </body>
 </html>

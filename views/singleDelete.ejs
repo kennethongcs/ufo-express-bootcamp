@@ -1,8 +1,12 @@
 <html>
   <head>
+    <!-- form to delete a single sighting -->
+    <%- include('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <%- include('partials/nav') %>
+
     <p>Click "Delete" below to delete sighting <%= index %>.</p>
     <form action="/sighting/<%= index %>?_method=DELETE" method="POST">
       <input type="submit" value="Delete" />

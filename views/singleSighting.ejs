@@ -1,25 +1,26 @@
 <html>
   <head>
-    <title>Sighting</title>
+    <!-- page to view single sighting -->
+    <title>Sighting Data</title>
+    <%- include('partials/bootstrap') %>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <a href="/sighting/<%= sightingsObj.index %>/edit ">Click here to edit</a
-    ><br />
-    <a href="/sighting/<%= sightingsObj.index %>/delete "
-      >Click here to delete</a
-    >
-    <h3>Statement:</h3>
-    <p><%= sightingsObj.sightings.text %></p>
-    <h3>Date / Time:</h3>
-    <p><%= sightingsObj.sightings.date_time%></p>
-    <h3>City:</h3>
-    <p><%= sightingsObj.sightings.city %></p>
-    <h3>State:</h3>
-    <p><%= sightingsObj.sightings.state %></p>
-    <h3>Duration:</h3>
-    <p><%= sightingsObj.sightings.duration %></p>
-    <h3>Summary:</h3>
-    <p><%= sightingsObj.sightings.summary %></p>
+    <%- include('partials/nav') %>
+    <div class="container-fluid mt-4">
+      <h1 class="display-4 mb-4">Sighting Data</h1>
+      <h3>Statement:</h3>
+      <p><%= sightingsObj.sightings.text %></p>
+      <h3>Date / Time:</h3>
+      <p><%= sightingsObj.sightings.date_time%></p>
+      <h3>City:</h3>
+      <p><%= sightingsObj.sightings.city %></p>
+      <h3>State:</h3>
+      <p><%= sightingsObj.sightings.state %></p>
+      <h3>Duration:</h3>
+      <p><%= sightingsObj.sightings.duration %></p>
+      <h3>Summary:</h3>
+      <p><%= sightingsObj.sightings.summary %></p>
+    </div>
   </body>
 </html>
