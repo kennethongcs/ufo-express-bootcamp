@@ -21,7 +21,7 @@ app.post('/sighting', (req, res) => {
     if (err) {
       console.log('Add error', err);
     }
-    res.status(200);
+    res.status(200).redirect('/');
   });
 });
 
@@ -121,7 +121,8 @@ app.get('/shapes', (req, res) => {
     content.sightings.forEach((sighting) => {
       listOfShapes.push(sighting.shape);
     });
-    res.render('shapes', { listOfShapes });
+    const noDupesList = [...new Set(listOfShapes)];
+    res.render('shapes', { noDupesList });
   });
 });
 
@@ -132,11 +133,15 @@ app.get('/shapes/:shape', (req, res) => {
     if (err) {
       console.log('Read error: ', err);
     }
-    const filteredList = content.sightings.filter((sighting) => {
+
+    const filteredList = content.sightings.filter((sighting, index) => {
       if (sighting.shape === shape) {
+        // add index of item in DB to obj
+        sighting.index = index;
         return sighting.shape;
       }
     });
+    filteredList.shape = shape.toLowerCase();
     res.render('singleShape', { filteredList });
   });
 });
