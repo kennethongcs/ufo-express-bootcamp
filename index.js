@@ -6,6 +6,7 @@ import methodOverride from 'method-override';
 import { read, add, edit, write } from './jsonFileStorage.js';
 
 const app = express();
+const port = process.argv[2];
 
 app.set('view engine', 'ejs');
 // to use 'public' folder
@@ -182,4 +183,4 @@ app.get('/shapes/:shape', (req, res) => {
   });
 });
 
-app.listen(3004);
+app.listen(port);
