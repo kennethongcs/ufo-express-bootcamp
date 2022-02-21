@@ -11,7 +11,7 @@
       <h1 class="display-4 mb-4">Sighting Data</h1>
       <h3>Statement:</h3>
       <p><%= sightingsObj.sightings.text %></p>
-      <h3>Date / Time:</h3>
+      <h3>Date / Time of Sighting:</h3>
       <p><%= sightingsObj.sightings.date_time%></p>
       <h3>City:</h3>
       <p><%= sightingsObj.sightings.city %></p>
@@ -21,6 +21,12 @@
       <p><%= sightingsObj.sightings.duration %></p>
       <h3>Summary:</h3>
       <p><%= sightingsObj.sightings.summary %></p>
+      <hr />
+      <p>Date submitted form: (yyyy / m / d)</p>
+      <p style="font: bold">
+        <%= sightingsObj.sightings.year %> / <%= sightingsObj.sightings.month %>
+        / <%= sightingsObj.sightings.day %>
+      </p>
     </div>
   </body>
 </html>
