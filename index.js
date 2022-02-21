@@ -1,14 +1,25 @@
 /* eslint-disable comma-dangle */
+import cookieParser from 'cookie-parser';
 import express, { urlencoded } from 'express';
 import methodOverride from 'method-override';
+
 import { read, add, edit, write } from './jsonFileStorage.js';
 
 const app = express();
 
 app.set('view engine', 'ejs');
+// to use 'public' folder
 app.use(express.static('public'));
+// to use req.body
 app.use(urlencoded({ extended: false }));
+// to use DEL or PUSH
 app.use(methodOverride('_method'));
+// to parse cooking string from req into an obj
+app.use(cookieParser());
+
+const capFirstLetter = (string) => {
+  return string[0].toUpperCase() + string.slice(1);
+};
 
 // render form
 app.get('/sighting', (req, res) => {
@@ -17,7 +28,19 @@ app.get('/sighting', (req, res) => {
 
 // add form data to DB
 app.post('/sighting', (req, res) => {
-  add('data.json', 'sightings', req.body, (err) => {
+  // make a copy of the req.body
+  const data = { ...req.body };
+  // change shape to lowercase
+  data.shape = req.body.shape.toLowerCase();
+  const d = new Date();
+  // add year of form submit
+  data.year = d.getFullYear();
+  // add month of form submit
+  data.month = d.getMonth() + 1;
+  // add day of form submit
+  data.day = d.getDay();
+
+  add('data.json', 'sightings', data, (err) => {
     if (err) {
       console.log('Add error', err);
     }
@@ -83,15 +106,28 @@ app.put('/sighting/:index', (req, res) => {
   );
 });
 
-// render a list of sightings
+// render a list of sightings (index page)
 app.get('/', (req, res) => {
+  // setting the cookie for tracking number of visits to the site
+  res.cookie('visits', 0);
+
+  // incrementing the number visits
+  let visits = 0;
+  if (req.cookies.visits) {
+    visits = Number(req.cookies.visits);
+  }
+  visits += 1;
+
+  // res.clearCookie('visits');
+  // updates the cookie with the new value
+  res.cookie('visits', visits);
+
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error:', err);
     }
     const { sightings } = content;
-
-    res.render('index', { sightings });
+    res.render('index', { sightings, visits });
   });
 });
 
