@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable comma-dangle */
 import cookieParser from 'cookie-parser';
 import express, { urlencoded } from 'express';
@@ -107,7 +108,7 @@ app.put('/sighting/:index', (req, res) => {
   );
 });
 
-// render a list of sightings (index page)
+// render a list of sightings (index page) DOING
 app.get('/', (req, res) => {
   // setting the cookie for tracking number of visits to the site
   res.cookie('visits', 0);
@@ -126,6 +127,29 @@ app.get('/', (req, res) => {
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error:', err);
+    }
+    // get query data
+    const sightingQuery = req.query.sighting;
+    // sort by shape
+    if (sightingQuery === 'shape') {
+      content.sightings.sort((a, b) => {
+        return a.shape > b.shape ? 1 : -1;
+      });
+    }
+    if (sightingQuery === 'city') {
+      content.sightings.sort((a, b) => {
+        return a.city > b.city ? 1 : -1;
+      });
+    }
+    if (sightingQuery === 'state') {
+      content.sightings.sort((a, b) => {
+        return a.state > b.state ? 1 : -1;
+      });
+    }
+    if (sightingQuery === 'date_time') {
+      content.sightings.sort((a, b) => {
+        return a.date_time > b.date_time ? 1 : -1;
+      });
     }
     const { sightings } = content;
     res.render('index', { sightings, visits });
