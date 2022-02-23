@@ -22,6 +22,14 @@
       <h3>Summary:</h3>
       <p><%= sightingsObj.sightings.summary %></p>
       <hr />
+
+      <a
+        href="/favorites/?favorite=<%= index  %> "
+        class="btn btn-info"
+        role="button"
+        >Favorite this sighting</a
+      >
+      <br /><br />
       <p>Date submitted form: (yyyy / m / d)</p>
       <p style="font: bold">
         <%= sightingsObj.sightings.year %> / <%= sightingsObj.sightings.month %>
