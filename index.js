@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable arrow-body-style */
 /* eslint-disable comma-dangle */
 import cookieParser from 'cookie-parser';
@@ -112,13 +113,16 @@ app.put('/sighting/:index', (req, res) => {
 app.get('/favorites', (req, res) => {
   // get favorited sighting from query
   const { favorite } = req.query;
+  // console.log('initial', favorite);
   // push favorite into an array
-
   let arrayOfFavorites = [];
   // if 'favorite' cookie exists, then add current favorite and newly added favorite
   if (req.cookies.favorite) {
-    arrayOfFavorites = [Number(req.cookies.favorite)];
+    arrayOfFavorites = req.cookies.favorite;
+    // console.log('1', arrayOfFavorites);
     arrayOfFavorites.push(Number(favorite));
+    // console.log('2', arrayOfFavorites);
+    arrayOfFavorites = [...new Set(arrayOfFavorites)];
   } else {
     // if 'favorite' does not exist then push the initial value in
     arrayOfFavorites.push(Number(favorite));
@@ -126,7 +130,6 @@ app.get('/favorites', (req, res) => {
   // add / update cookie to the latest 'favorite'
   res.cookie('favorite', arrayOfFavorites);
   // redirect back to index page
-  // console.log(arrayOfFavorites);
   res.redirect('/');
 });
 
@@ -140,6 +143,7 @@ app.get('/', (req, res) => {
     visits = Number(req.cookies.visits);
   }
   visits += 1;
+  ///// logic to delete cookies //////
   // res.clearCookie('visits');
   // res.clearCookie('favorite');
   // updates the cookie with the new value
@@ -148,9 +152,11 @@ app.get('/', (req, res) => {
   // retrieve 'favorite' cookie and store in var
   const favoriteSightings = req.cookies.favorite;
   // sort favorited sightings
-  favoriteSightings.sort((a, b) => {
-    return a > b ? 1 : -1;
-  });
+  if (favoriteSightings) {
+    favoriteSightings.sort((a, b) => {
+      return a > b ? 1 : -1;
+    });
+  }
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error:', err);
