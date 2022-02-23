@@ -66,16 +66,6 @@ app.get('/sighting/:index', (req, res) => {
   });
 });
 
-// favorite page
-app.get('/favorites', (req, res) => {
-  // get favorited sighting from query
-  const { favorite } = req.query;
-  // add a cookie to store favorites
-  res.cookie('favorite', favorite);
-  // redirect back to index page
-  res.redirect('/');
-});
-
 // render form to edit a single sighting
 app.get('/sighting/:index/edit', (req, res) => {
   const { index } = req.params;
@@ -118,6 +108,28 @@ app.put('/sighting/:index', (req, res) => {
   );
 });
 
+// favorite page DOING
+app.get('/favorites', (req, res) => {
+  // get favorited sighting from query
+  const { favorite } = req.query;
+  // push favorite into an array
+
+  let arrayOfFavorites = [];
+  // if 'favorite' cookie exists, then add current favorite and newly added favorite
+  if (req.cookies.favorite) {
+    arrayOfFavorites = [Number(req.cookies.favorite)];
+    arrayOfFavorites.push(Number(favorite));
+  } else {
+    // if 'favorite' does not exist then push the initial value in
+    arrayOfFavorites.push(Number(favorite));
+  }
+  // add / update cookie to the latest 'favorite'
+  res.cookie('favorite', arrayOfFavorites);
+  // redirect back to index page
+  // console.log(arrayOfFavorites);
+  res.redirect('/');
+});
+
 // render a list of sightings (index page) DOING
 app.get('/', (req, res) => {
   // setting the cookie for tracking number of visits to the site
@@ -129,11 +141,14 @@ app.get('/', (req, res) => {
   }
   visits += 1;
   // res.clearCookie('visits');
+  // res.clearCookie('favorite');
   // updates the cookie with the new value
   res.cookie('visits', visits);
 
   // retrieve 'favorite' cookie and store in var
-  const favoriteSightings = [Number(req.cookies.favorite)];
+  const favoriteSightings = req.cookies.favorite;
+  // const favoriteSightingsArray = [];
+  // favoriteSightingsArray.push(favoriteSightings);
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error:', err);
