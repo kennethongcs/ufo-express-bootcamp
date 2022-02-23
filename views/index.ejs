@@ -22,7 +22,12 @@
           <option value="state">state</option>
           <option value="date_time">Date/ Time</option>
         </select>
-        <button class="btn btn-outline-secondary btn-sm" input type="submit">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          input
+          type="submit"
+        >
           Sort
         </button>
       </form>
@@ -64,13 +69,12 @@
           </tbody>
         </table>
         <section>
-          Your favorite sighting(s): <br />
+          <% if (favoriteSightings) { %> Your favorite sighting(s): <br />
           <% for( let i = 0; i < favoriteSightings.length; i++ ) { %>
           <a href="/sighting/<%= favoriteSightings[i]%>"
             >Sighting <%= favoriteSightings[i]+1%> </a
           ><br />
-          <% } %>
-          <br /><br />
+          <% } %> <br /><br /><% } %>
         </section>
         <p>Total visits = <%= visits %></p>
       </main>
