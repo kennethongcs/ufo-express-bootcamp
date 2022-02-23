@@ -62,8 +62,18 @@ app.get('/sighting/:index', (req, res) => {
       sightings,
       index,
     };
-    res.render('singleSighting', { sightingsObj });
+    res.render('singleSighting', { sightingsObj, index });
   });
+});
+
+// favorite page
+app.get('/favorites', (req, res) => {
+  // get favorited sighting from query
+  const { favorite } = req.query;
+  // add a cookie to store favorites
+  res.cookie('favorite', favorite);
+  // redirect back to index page
+  res.redirect('/');
 });
 
 // render form to edit a single sighting
@@ -112,18 +122,18 @@ app.put('/sighting/:index', (req, res) => {
 app.get('/', (req, res) => {
   // setting the cookie for tracking number of visits to the site
   res.cookie('visits', 0);
-
   // incrementing the number visits
   let visits = 0;
   if (req.cookies.visits) {
     visits = Number(req.cookies.visits);
   }
   visits += 1;
-
   // res.clearCookie('visits');
   // updates the cookie with the new value
   res.cookie('visits', visits);
 
+  // retrieve 'favorite' cookie and store in var
+  const favoriteSightings = [Number(req.cookies.favorite)];
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error:', err);
@@ -152,7 +162,7 @@ app.get('/', (req, res) => {
       });
     }
     const { sightings } = content;
-    res.render('index', { sightings, visits });
+    res.render('index', { sightings, visits, favoriteSightings });
   });
 });
 
