@@ -147,8 +147,10 @@ app.get('/', (req, res) => {
 
   // retrieve 'favorite' cookie and store in var
   const favoriteSightings = req.cookies.favorite;
-  // const favoriteSightingsArray = [];
-  // favoriteSightingsArray.push(favoriteSightings);
+  // sort favorited sightings
+  favoriteSightings.sort((a, b) => {
+    return a > b ? 1 : -1;
+  });
   read('data.json', (err, content) => {
     if (err) {
       console.log('Read error:', err);
