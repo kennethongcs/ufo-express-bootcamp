@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 // to use req.body
 app.use(urlencoded({ extended: false }));
-// to use DEL or PUSH
+// to use DEL or PUT
 app.use(methodOverride('_method'));
 // to parse cooking string from req into an obj
 app.use(cookieParser());
